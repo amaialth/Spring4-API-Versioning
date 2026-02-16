@@ -1,0 +1,33 @@
+spring:
+  application:
+    name: apiversion
+# Basic versioning configuration
+#  mvc:
+#    apiversion:
+#      supported: 1.0,2.0
+#      default: 1.0
+
+  # Choose ONE versioning strategy:
+
+  # Path segment versioning (e.g., /api/v1/users)
+#      use:
+#        path-segment: 1
+  # Request header versioning (e.g., X-API-Version: 1.0)
+    #    header: X-API-Version
+
+  # Query parameter versioning (e.g., ?version=1.0)
+   #     query-parameter: version
+
+  # Media type parameter versioning (e.g., Accept: application/json;version=1.0)
+  #      media-type-parameter:
+ #         "[application/json]": version
+spring-doc:
+  api-docs:
+    path: /docs/api-docs
+  swagger-ui:
+    operations-sorter: method
+    groups-order: ASC
+    tags-sorter: alpha
+    doc-expansion: none
+    display-request-duration: true
+    path: /docs/swagger-ui
