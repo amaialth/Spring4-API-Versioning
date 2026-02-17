@@ -14,10 +14,10 @@ public class VersioningConfig implements WebMvcConfigurer {
                 .addSupportedVersions("1.0", "2.0")
                 .setDefaultVersion("1.0")
                 .useVersionResolver(new CustomApiVersionResolver())
-                //.usePathSegment(1)
-                 .useRequestHeader("X-API-Version")
-                 .useQueryParam("version")
-                 .useMediaTypeParameter(MediaType.APPLICATION_JSON, "version");
+                .usePathSegment(1);
+                // .useRequestHeader("X-API-Version")
+                 //.useQueryParam("version")
+                 //.useMediaTypeParameter(MediaType.APPLICATION_JSON, "version");
     }
 
 }

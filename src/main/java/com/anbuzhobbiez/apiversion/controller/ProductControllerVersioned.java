@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 import java.util.stream.Collectors;
 
-////@RestController
+@RestController
 @Tag(name = "Product API", description = "Manage product catalog across different versions")
 public class ProductControllerVersioned {
     private final ProductService productService;
@@ -21,7 +21,7 @@ public class ProductControllerVersioned {
     }
 
     @Operation(summary = "Get Products V1", description = "Legacy endpoint: Returns products without pricing information.")
-    @GetMapping(path = "/products", version = "1")
+    @GetMapping(path = "/v1/products")
     public List<ProductV1> getAllProductsV1() {
         return productService.getAllProducts().stream()
                 .map(product -> new ProductV1(product.id(), product.name(), product.description()))
@@ -29,7 +29,7 @@ public class ProductControllerVersioned {
     }
 
     @Operation(summary = "Get Products V2", description = "Current endpoint: Returns products including the new price field.")
-    @GetMapping(path = "/products", version = "2")
+    @GetMapping(path = "/v2/products")
     public List<ProductV2> getAllProductsV2() {
         return productService.getAllProducts().stream()
                 .map(product -> new ProductV2(product.id(), product.name(), product.description(), product.price()))

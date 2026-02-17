@@ -9,6 +9,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -28,8 +29,8 @@ public class PathBasedVersioning {
         @Operation(summary = "Get Products V1 (Legacy)", description = "Accessed via /v1/products. Returns basic product details without pricing.", responses = {
                         @ApiResponse(responseCode = "200", description = "Successful retrieval of v1 schema", content = @Content(schema = @Schema(implementation = ProductV1.class)))
         })
-        @GetMapping(value = "/{version}/products",version = "1")
-        public List<ProductV1> getV1() {
+        @GetMapping(value = "/{version}/products", version = "1")
+        public List<ProductV1> getV1(@PathVariable String version) {
                 return productService.getAllProducts().stream()
                                 .map(p -> new ProductV1(p.id(), p.name(), p.description()))
                                 .toList();
@@ -39,7 +40,7 @@ public class PathBasedVersioning {
                         @ApiResponse(responseCode = "200", description = "Successful retrieval of v2 schema", content = @Content(schema = @Schema(implementation = ProductV2.class)))
         })
         @GetMapping(value = "/{version}/products", version = "2")
-        public List<ProductV2> getV2() {
+        public List<ProductV2> getV2(@PathVariable String version) {
                 return productService.getAllProducts().stream()
                                 .map(p -> new ProductV2(p.id(), p.name(), p.description(), p.price()))
                                 .toList();
